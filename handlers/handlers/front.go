@@ -1,11 +1,14 @@
 package handlers
 
 import (
+	"PhotoBlog/BL/gallery"
 	ui "PhotoBlog/UI"
 	"net/http"
 )
 
 func Front(res http.ResponseWriter, req *http.Request) {
-	ui.Tpl.ExecuteTemplate(res, "index.html", nil)
+	gal := gallery.GetGallery()
+
+	ui.Tpl.ExecuteTemplate(res, "index.html", gal)
 
 }
