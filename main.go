@@ -14,7 +14,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/", http.HandlerFunc(front))
+	mux.Handle("/front", http.HandlerFunc(front))
 
 	http.ListenAndServe(":3000", mux)
 }

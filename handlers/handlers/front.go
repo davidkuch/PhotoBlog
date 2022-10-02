@@ -9,6 +9,6 @@ import (
 func Front(res http.ResponseWriter, req *http.Request) {
 	gal := gallery.GetGallery()
 
-	ui.Tpl.ExecuteTemplate(res, "index.html", gal)
+	ui.ShowGallery(res, gal)
 
 }
