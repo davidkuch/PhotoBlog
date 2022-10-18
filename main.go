@@ -10,7 +10,7 @@ import (
 func main() {
 	fmt.Println("Hello PhotoBlog!")
 
-	front := middleware.Secure(handlers.Front)
+	front := middleware.MakeSecure(handlers.Front)
 
 	mux := http.NewServeMux()
 

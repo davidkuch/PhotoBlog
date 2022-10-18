@@ -5,10 +5,30 @@ import (
 	"net/http"
 )
 
-func Secure(raw func(http.ResponseWriter, *http.Request)) func(http.ResponseWriter, *http.Request) {
+func MakeSecure(raw func(http.ResponseWriter, *http.Request)) func(http.ResponseWriter, *http.Request) {
 	return func(res http.ResponseWriter, req *http.Request) {
-		fmt.Println("secure before")
+		status := checkSession(req)
+
+		if !status {
+			//session err return
+			fmt.Println("session err")
+		}
+
 		raw(res, req)
-		fmt.Println("secure after")
+
 	}
+}
+
+func checkSession(req *http.Request) bool {
+	cookie, err := req.Cookie("session-id")
+
+	if err.Error() == "ErrNoCookie" {
+		return false //temp: to be fixed later
+	}
+
+	if cookie.String() == "-1" {
+		return false
+	}
+
+	return true
 }
