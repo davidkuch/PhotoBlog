@@ -41,7 +41,7 @@ func init_open_stt() {
 
 func ping() {
 
-	fmt.Println("DB: attempt to ping")
+	fmt.Println("DB: attempt to ping...")
 
 	db, err := sql.Open("mysql", open_stt)
 
