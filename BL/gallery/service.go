@@ -8,14 +8,6 @@ import (
 	"github.com/google/uuid"
 )
 
-func GetGallery() *Gallery {
-	fmt.Println("gallery service called")
-
-	db.Dummy()
-
-	return &Gallery{uuid.New(), "some", time.Now(), time.Now(), nil}
-}
-
 func NewGallery(name string) uuid.UUID {
 	gallery_uid := uuid.New()
 
@@ -28,4 +20,12 @@ func NewGallery(name string) uuid.UUID {
 	fmt.Println("created gallery: ", gallery)
 
 	return gallery_uid
+}
+
+func GetGallery(id uuid.UUID) *Gallery {
+	fmt.Println("gallery service called")
+
+	db.Dummy()
+
+	return &Gallery{uuid.New(), "some", time.Now(), time.Now(), nil}
 }
