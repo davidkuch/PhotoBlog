@@ -2,6 +2,7 @@ package gallery
 
 import (
 	db "PhotoBlog/DB"
+	"PhotoBlog/model"
 	"fmt"
 	"time"
 
@@ -15,17 +16,19 @@ func NewGallery(name string) uuid.UUID {
 		name = "unnamed gallery"
 	}
 
-	gallery := Gallery{gallery_uid, name, time.Now(), time.Now(), nil}
+	gallery := gallery{gallery_uid, name, time.Now(), time.Now(), nil}
+
+	db.SaveNewGallery(wrap(&gallery))
 
 	fmt.Println("created gallery: ", gallery)
 
 	return gallery_uid
 }
 
-func GetGallery(id uuid.UUID) *Gallery {
+func GetGallery(id uuid.UUID) *model.GalleryDTO {
 	fmt.Println("gallery service called")
 
 	db.Dummy()
 
-	return &Gallery{uuid.New(), "some", time.Now(), time.Now(), nil}
+	return wrap(&gallery{uuid.New(), "some", time.Now(), time.Now(), nil})
 }

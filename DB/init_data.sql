@@ -1,6 +1,8 @@
 USE photo_db;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS galleries;
+DROP TABLE IF EXISTS user_gallery_acces;
+DROP TABLE IF EXISTS pic_to_gallery;
 
 CREATE TABLE users(
     id VARCHAR(16) PRIMARY KEY,
