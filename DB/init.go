@@ -10,7 +10,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var open_stt string
+var db *sql.DB
 
 func Dummy() {
 	fmt.Println("dummy!")
@@ -22,7 +22,7 @@ func init() {
 	init_db()
 }
 
-func init_open_stt() {
+func init_open_stt() string {
 	config, err := ioutil.ReadFile("/home/davidk/github/PhotoBlog/DB/config.json")
 
 	if err != nil {
@@ -36,12 +36,16 @@ func init_open_stt() {
 	username := config_map["username"]
 	password := config_map["password"]
 
-	open_stt = fmt.Sprintf("%s:%s@/photo_db?multiStatements=true", username, password)
+	open_stt := fmt.Sprintf("%s:%s@/photo_db?multiStatements=true", username, password)
+
+	return open_stt
 }
 
 func ping() {
 
 	fmt.Println("DB: attempt to ping...")
+
+	open_stt := init_open_stt()
 
 	db, err := sql.Open("mysql", open_stt)
 
@@ -49,7 +53,7 @@ func ping() {
 		panic(err)
 	}
 
-	defer db.Close()
+	db.Ping()
 
 	db.SetConnMaxLifetime(time.Minute * 3)
 	db.SetMaxOpenConns(10)
@@ -59,13 +63,6 @@ func ping() {
 }
 
 func init_db() {
-
-	db, err := sql.Open("mysql", open_stt)
-
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
 
 	sql, err := ioutil.ReadFile("/home/davidk/github/PhotoBlog/DB/init_data.sql")
 
