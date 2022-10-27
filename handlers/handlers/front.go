@@ -1,16 +1,15 @@
 package handlers
 
 import (
-	"PhotoBlog/BL/gallery"
-	ui "PhotoBlog/UI"
+	"fmt"
 	"net/http"
 
-	"github.com/google/uuid"
+	"PhotoBlog/BL/user"
 )
 
 func Front(res http.ResponseWriter, req *http.Request) {
-	gal := gallery.GetGallery(uuid.New())
+	user := user.NewUser("diff", "folky")
 
-	ui.ShowGallery(res, gal)
+	fmt.Println("user: ", user)
 
 }

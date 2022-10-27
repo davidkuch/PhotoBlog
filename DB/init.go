@@ -47,11 +47,14 @@ func ping() {
 
 	open_stt := init_open_stt()
 
-	db, err := sql.Open("mysql", open_stt)
+	var err error
+
+	db, err = sql.Open("mysql", open_stt)
 
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("#2 db pointer to: ", db)
 
 	db.Ping()
 
@@ -69,6 +72,8 @@ func init_db() {
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println("#3 db pointer to: ", db)
 
 	res, err := db.Exec(string(sql))
 
