@@ -11,10 +11,12 @@ func main() {
 	fmt.Println("Hello PhotoBlog!")
 
 	front := middleware.MakeSecure(handlers.Front)
+	register := middleware.MakeSecure(handlers.Register)
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/front", http.HandlerFunc(front))
+	mux.Handle("/", http.HandlerFunc(front))
+	mux.Handle("/register", http.HandlerFunc(register))
 
 	http.ListenAndServe(":3000", mux)
 }

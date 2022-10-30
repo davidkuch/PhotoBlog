@@ -1,7 +1,6 @@
 package ui
 
 import (
-	"PhotoBlog/model"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -14,6 +13,7 @@ func init() {
 	fmt.Println("UI: templates parsed")
 }
 
-func ShowGallery(writer http.ResponseWriter, to_show *model.GalleryDTO) {
-	Tpl.ExecuteTemplate(writer, "index.html", *to_show)
+func Front(writer http.ResponseWriter) {
+
+	Tpl.ExecuteTemplate(writer, "index.html", nil)
 }

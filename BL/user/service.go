@@ -2,20 +2,30 @@ package user
 
 import (
 	"PhotoBlog/model"
+	"fmt"
 
 	"github.com/google/uuid"
 
 	db "PhotoBlog/DB"
 )
 
-func NewUser(name string, family string) model.User {
+func NewUser(name, family, email string) model.UserDTO {
 	new_id := uuid.New()
 
-	new_user := user{new_id, name, family}
+	new_user := user{new_id, name, family, email}
 
-	ret := wrap(new_user)
+	//here goes some logic... validation etc'
+	if userExists(new_user) {
+		fmt.Println("user already exists with email: ", new_user.email)
 
-	db.SaveNewUser(ret)
+		return model.MakeFalseUserDTO()
+	}
 
-	return ret
+	//and back to DTO and to other layer
+
+	dto := wrap(new_user)
+
+	db.SaveNewUser(dto)
+
+	return dto
 }

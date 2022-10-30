@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS pic_to_gallery;
 CREATE TABLE users(
     id VARCHAR(120) PRIMARY KEY,
     name VARCHAR(120),
-    family VARCHAR(120)
+    family VARCHAR(120),
+    email VARCHAR(120)
 );
 
 CREATE TABLE galleries(
