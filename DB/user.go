@@ -32,6 +32,8 @@ func EmailExists(email string) bool {
 		return false
 	}
 
+	//check other err cases...
+
 	return true
 
 }
