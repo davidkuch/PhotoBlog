@@ -22,12 +22,8 @@ func MakeSecure(raw func(http.ResponseWriter, *http.Request)) func(http.Response
 func checkSession(req *http.Request) bool {
 	cookie, err := req.Cookie("session-id")
 
-	if err.Error() == "ErrNoCookie" {
+	if err == http.ErrNoCookie {
 		return false //temp: to be fixed later
-	}
-
-	if cookie.String() == "-1" {
-		return false
 	}
 
 	return true

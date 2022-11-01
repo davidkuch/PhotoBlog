@@ -6,14 +6,16 @@ import (
 	"net/http"
 )
 
-var Tpl *template.Template
+var tpl *template.Template
 
 func init() {
-	Tpl = template.Must(template.ParseGlob("./UI/templates/*.html"))
+	tpl = template.Must(template.ParseGlob("./UI/templates/components/*.html"))
+	template.Must(tpl.ParseGlob("./UI/templates/*.html"))
+
 	fmt.Println("UI: templates parsed")
 }
 
 func Front(writer http.ResponseWriter) {
 
-	Tpl.ExecuteTemplate(writer, "index.html", nil)
+	tpl.ExecuteTemplate(writer, "index.html", nil)
 }
