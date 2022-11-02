@@ -9,7 +9,7 @@ import (
 	db "PhotoBlog/DB"
 )
 
-func NewUser(name, family, email string) model.UserDTO {
+func NewUser(name, family, password, email string) model.UserDTO {
 	new_id := uuid.New()
 
 	new_user := user{new_id, name, family, email}
@@ -25,7 +25,7 @@ func NewUser(name, family, email string) model.UserDTO {
 
 	dto := wrap(new_user)
 
-	db.SaveNewUser(dto)
+	db.SaveNewUser(dto, password)
 
 	return dto
 }

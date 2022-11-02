@@ -8,16 +8,19 @@ import (
 	ui "PhotoBlog/UI"
 )
 
-func Front(res http.ResponseWriter, req *http.Request) {
+func front(res http.ResponseWriter, req *http.Request) {
+	fmt.Println("front called!")
 	ui.Front(res)
 }
 
-func Register(res http.ResponseWriter, req *http.Request) {
+func register(res http.ResponseWriter, req *http.Request) {
+	fmt.Println("register called!")
 	name := req.FormValue("name")
 	family := req.FormValue("family")
+	password := req.FormValue("password")
 	email := req.FormValue("email")
 
-	user := user.NewUser(name, family, email)
+	user := user.NewUser(name, family, password, email)
 
 	if user.IsFalseUserDTO() {
 		fmt.Println("could not create this user. email already exists?")

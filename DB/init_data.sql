@@ -1,5 +1,6 @@
 USE photo_db;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS passwords;
 DROP TABLE IF EXISTS galleries;
 DROP TABLE IF EXISTS user_gallery_acces;
 DROP TABLE IF EXISTS pic_to_gallery;
@@ -9,6 +10,11 @@ CREATE TABLE users(
     name VARCHAR(120),
     family VARCHAR(120),
     email VARCHAR(120)
+);
+
+CREATE TABLE passwords(
+    id VARCHAR(120) PRIMARY KEY,
+    password VARCHAR(120)
 );
 
 CREATE TABLE galleries(
