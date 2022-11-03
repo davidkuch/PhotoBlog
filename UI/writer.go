@@ -8,6 +8,11 @@ import (
 
 var tpl *template.Template
 
+//var viewToTemplate = map[string]string{
+//	"front" : "index.html",
+//	"user_home" : "user_home.html"
+//}
+
 func init() {
 	tpl = template.Must(template.ParseGlob("./UI/templates/components/*.html"))
 	template.Must(tpl.ParseGlob("./UI/templates/*.html"))
@@ -15,7 +20,11 @@ func init() {
 	fmt.Println("UI: templates parsed")
 }
 
-func Front(writer http.ResponseWriter) {
+func ShowView(writer http.ResponseWriter, view string) {
 
-	tpl.ExecuteTemplate(writer, "index.html", nil)
+	to_execute := view + ".html"
+
+	fmt.Println("UI:to_execute: ", to_execute)
+
+	tpl.ExecuteTemplate(writer, to_execute, nil)
 }

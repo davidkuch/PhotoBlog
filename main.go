@@ -7,16 +7,15 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello PhotoBlog!")
 
-	mux := http.NewServeMux()
-
-	fmt.Println(handlers.HandlersMapping)
+	fmt.Println("handlers: ", handlers.HandlersMapping)
 
 	//register handlers for routs.
 	for rout, handler := range handlers.HandlersMapping {
-		mux.Handle(rout, handler)
+		http.Handle(rout, handler)
 	}
 
-	http.ListenAndServe(":3000", mux)
+	fmt.Println("Hello PhotoBlog!")
+
+	http.ListenAndServe(":3000", nil)
 }

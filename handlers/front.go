@@ -10,11 +10,12 @@ import (
 
 func front(res http.ResponseWriter, req *http.Request) {
 	fmt.Println("front called!")
-	ui.Front(res)
+	ui.ShowView(res, "index")
 }
 
 func register(res http.ResponseWriter, req *http.Request) {
 	fmt.Println("register called!")
+
 	name := req.FormValue("name")
 	family := req.FormValue("family")
 	password := req.FormValue("password")
@@ -29,5 +30,7 @@ func register(res http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Println("new user: ", user)
+
+	res.WriteHeader(http.StatusCreated)
 
 }

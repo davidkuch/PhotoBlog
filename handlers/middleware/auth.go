@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func MakeSecure(endpoint func(http.ResponseWriter, *http.Request)) func(http.ResponseWriter, *http.Request) {
+func MakeSecure(endpoint http.HandlerFunc) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
 		status := checkSession(req)
 
@@ -13,7 +13,8 @@ func MakeSecure(endpoint func(http.ResponseWriter, *http.Request)) func(http.Res
 			//session err return
 			fmt.Println("session err")
 		}
-		//fmt.Println("handler called...")
+
+		fmt.Println("decorator called...")
 
 		endpoint(res, req)
 
